@@ -592,12 +592,10 @@ class LegendRendererView extends PlotWidget
     legend_offset_x = start_x
     legend_offset_y = start_y
 
-    can_ctx.strokeStyle = 'black'
+    can_ctx.strokeStyle = @model.get('border_color')
     can_ctx.strokeRect(legend_offset_x, legend_offset_y, legend_width, legend_height)
-    can_ctx.fillStyle = 'white'
+    can_ctx.fillStyle = @model.get('fill_color')
     can_ctx.fillRect(legend_offset_x, legend_offset_y, legend_width, legend_height)
-    can_ctx.strokeStyle = 'black'
-    can_ctx.fillStyle = 'black'
 
     legend_offset_x += 5
     legend_offset_y += 10

@@ -708,7 +708,8 @@ class Legend extends Continuum.HasParent
   default_view : Bokeh.LegendRendererView
   defaults :
     renderers : []
-    unselected_color : "#ccc"
+    border_color : "black"
+    fill_color : "white"
     positions :
       top_left     : [ 20,  20]
       top_right    : [-80,  20]

@@ -561,65 +561,6 @@ class LineRendererView extends XYRendererView
     return null
 
 
-class LegendRendererView extends PlotWidget
-  render : ->
-    super()
-    #data = @model.get_obj('data_source').get('data')
-    #@calc_buffer(data)
-    can_ctx = @plot_view.ctx
-
-
-    coords = @model.get('coords')
-    [x, y] = coords
-    if x < 0
-      start_x = @plot_view.viewstate.get('width') + x
-    else
-      start_x = x
-
-    if y < 0
-      start_y = @plot_view.viewstate.get('height') + y
-    else
-      start_y = y 
-
-    
-    #width = can_ctx.measureText("blahblah").width
-    text_height = 10
-
-
-    widths = []
-    for l in @model.get('legends')
-      widths.push(can_ctx.measureText(l.name).width)
-    legend_width = Math.max.apply(Math, widths) + @model.get('x_padding') * 2
-
-    legend_list = @model.get('legends')
-    legend_height = (text_height * (legend_list.length - 1)) + @model.get('y_padding') * 2
-
-
-
-
-    legend_offset_x = start_x
-    legend_offset_y = start_y
-
-    can_ctx.strokeStyle = @model.get('border_color')
-    can_ctx.strokeRect(legend_offset_x, legend_offset_y, legend_width, legend_height)
-    can_ctx.fillStyle = @model.get('fill_color')
-    can_ctx.fillRect(legend_offset_x, legend_offset_y, legend_width, legend_height)
-
-    legend_offset_x += @model.get('x_padding') 
-    legend_offset_y += @model.get('y_padding') 
-    legend_offset_y += text_height
-
-    for l in @model.get('legends')
-      console.log("l.name", l.name, l, legend_offset_x, legend_offset_y)
-      can_ctx.strokeStyle = l.color
-      can_ctx.fillStyle = l.color
-      
-      can_ctx.fillText(l.name, legend_offset_x, legend_offset_y)
-      legend_offset_y += text_height
-    can_ctx.stroke()
-    @render_end()
-    return null
-
 
 class MetaGlyph
   constructor: (@styleprovider, @glyphspec, @attrnames) ->

@@ -583,10 +583,18 @@ class LegendRendererView extends PlotWidget
 
     
     #width = can_ctx.measureText("blahblah").width
-    text_height = 20
+    text_height = 10
 
-    legend_height = text_height * @model.get('legends').length
-    legend_width = 100
+
+    widths = []
+    for l in @model.get('legends')
+      widths.push(can_ctx.measureText(l.name).width)
+    legend_width = Math.max.apply(Math, widths) + @model.get('x_padding') * 2
+
+    legend_list = @model.get('legends')
+    legend_height = (text_height * (legend_list.length - 1)) + @model.get('y_padding') * 2
+
+
 
 
     legend_offset_x = start_x
@@ -597,8 +605,9 @@ class LegendRendererView extends PlotWidget
     can_ctx.fillStyle = @model.get('fill_color')
     can_ctx.fillRect(legend_offset_x, legend_offset_y, legend_width, legend_height)
 
-    legend_offset_x += 5
-    legend_offset_y += 10
+    legend_offset_x += @model.get('x_padding') 
+    legend_offset_y += @model.get('y_padding') 
+    legend_offset_y += text_height
 
     for l in @model.get('legends')
       console.log("l.name", l.name, l, legend_offset_x, legend_offset_y)

@@ -710,6 +710,8 @@ class Legend extends Continuum.HasParent
     renderers : []
     border_color : "black"
     fill_color : "white"
+    x_padding : 4
+    y_padding : 8
     positions :
       top_left     : [ 20,  20]
       top_right    : [-80,  20]
